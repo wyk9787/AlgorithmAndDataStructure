@@ -1,0 +1,3 @@
+﻿  linearlist.c
+d:\garrett\cs\datastructure_c\playwithdatastructure\linearlist\linearlist\linearlist.c(10): warning C4244: “函数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+  linearlist.vcxproj -> D:\Garrett\CS\dataStructure_C\playWithDataStructure\linearlist\Debug\linearlist.exe

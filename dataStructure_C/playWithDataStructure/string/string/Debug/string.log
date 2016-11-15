@@ -1,0 +1,4 @@
+﻿  stringcpp.cpp
+d:\garrett\cs\datastructure_c\playwithdatastructure\string\string\stringcpp.cpp(43): warning C4018: “<”: 有符号/无符号不匹配
+d:\garrett\cs\datastructure_c\playwithdatastructure\string\string\stringcpp.cpp(46): warning C4018: “<”: 有符号/无符号不匹配
+  string.vcxproj -> D:\Garrett\CS\dataStructure_C\playWithDataStructure\string\Debug\string.exe
