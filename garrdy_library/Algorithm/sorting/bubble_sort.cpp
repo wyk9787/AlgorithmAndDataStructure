@@ -24,7 +24,7 @@ int main(int argc, char const *argv[]) {
   for (int i = 0; i < n; i++) {
     cin >> a[i];
   }
-  // quick sort
+  // bubble sort
   bubble_sort(a);
   // output
   for (int i = 0; i < n; i++) {

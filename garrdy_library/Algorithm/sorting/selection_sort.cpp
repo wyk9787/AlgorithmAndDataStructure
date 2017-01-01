@@ -28,7 +28,7 @@ int main(int argc, char const *argv[]) {
   for (int i = 0; i < n; i++) {
     cin >> a[i];
   }
-  // quick sort
+  // selection sort
   selection_sort(a);
   // output
   for (int i = 0; i < n; i++) {
