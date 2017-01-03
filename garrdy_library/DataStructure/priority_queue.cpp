@@ -44,14 +44,14 @@ private:
   }
 
 public:
-  Priority_Queue(vector<int> &a) {
-    data = a;
-    size = a.size();
-    for (int i = floor(size / 2); i >= 0; i--) {
-      sift_down(i);
-    }
+  Priority_Queue() {
+    size = 0;
+    //        for (int i = floor(size / 2); i >= 0; i--) {
+    //            sift_down(i);
+    //        }
   }
   int get_size() { return size; }
+  void get_element(int p) { data.push_back(p); }
   bool empty() {
     if (size > 0)
       return false;
@@ -62,7 +62,10 @@ public:
 
   void insert(int p) {
     size++;
-    data[size - 1] = p;
+    if (data.empty())
+      data.push_back(p);
+    else
+      data[size - 1] = p;
     sift_up(size - 1);
   }
 
@@ -94,12 +97,13 @@ int main(int argc, char const *argv[]) {
   // n is how many elements are there in the list
   int n;
   cin >> n;
-  vector<int> a(n);
-  // input
+  Priority_Queue heap;
   for (int i = 0; i < n; i++) {
-    cin >> a[i];
+    int temp;
+    cin >> temp;
+    heap.insert(temp);
   }
-  Priority_Queue heap(a);
+
   // test
   heap.change_priority(4, 10);
   heap.remove(2);
