@@ -1,5 +1,7 @@
 // Created by Garrett Wang on 01/01/17
 // priority_queue.cpp
+// push = insert, top = get_min, pop = extract_min()
+// size = get_size, empty = empty
 
 #include <cmath>
 #include <cstdlib>
@@ -49,7 +51,13 @@ public:
       sift_down(i);
     }
   }
-
+  int get_size() { return size; }
+  bool empty() {
+    if (size > 0)
+      return false;
+    else
+      return true;
+  }
   int get_min() { return data[0]; }
 
   void insert(int p) {
@@ -76,7 +84,7 @@ public:
   }
 
   void remove(int i) {
-    data[i] = INT_MAX;
+    data[i] = INT_MIN;
     sift_up(i);
     extract_min();
   }
@@ -92,10 +100,16 @@ int main(int argc, char const *argv[]) {
     cin >> a[i];
   }
   Priority_Queue heap(a);
-  // output
-  for (int i = 0; i < n; i++) {
+  // test
+  heap.change_priority(4, 10);
+  heap.remove(2);
+  heap.insert(19);
+  cout << "size: " << heap.get_size() << endl;
+  int size = heap.get_size();
+  for (int i = 0; i < size; i++) {
     cout << heap.extract_min() << ' ';
   }
   cout << endl;
+
   return 0;
 }
