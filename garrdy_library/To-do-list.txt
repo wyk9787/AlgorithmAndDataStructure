@@ -6,6 +6,5 @@ Data Structure
   double-node link-list
   stack
   queue
-  priority queue
   set
   dynamic array (vector)

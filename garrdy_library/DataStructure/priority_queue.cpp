@@ -62,7 +62,7 @@ public:
 
   void insert(int p) {
     size++;
-    if (data.empty())
+    if (data.size() < size)
       data.push_back(p);
     else
       data[size - 1] = p;
