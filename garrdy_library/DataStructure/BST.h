@@ -3,5 +3,5 @@
 typedef int status;
 typedef struct BitNode {
     int data;
-    struct BitTnode *lchild, *rchild;
+    struct BitNode *lchild, *rchild;
 } BiTNode, *BiTree;
