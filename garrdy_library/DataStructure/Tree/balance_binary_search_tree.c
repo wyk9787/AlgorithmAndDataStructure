@@ -1,4 +1,4 @@
-#include "BBST.h"
+#include "blance_binary_search_tree.h"
 #include <stdlib.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -33,20 +33,17 @@ void L_Rotate(BiTree *p) {
     *p = R;
 }
 
-void LeftBalance(BiTree *T)
-{
+void LeftBalance(BiTree *T) {
 	BiTree L,Lr;
 	L=(*T)->lchild; /*  L指向T的左子树根结点 */
-	switch(L->bf)
-	{ /*  检查T的左子树的平衡度，并作相应平衡处理 */
+	switch(L->bf) { /*  检查T的左子树的平衡度，并作相应平衡处理 */
 		 case LH: /*  新结点插入在T的左孩子的左子树上，要作单右旋处理 */
 			(*T)->bf=L->bf=EH;
 			R_Rotate(T);
 			break;
 		 case RH: /*  新结点插入在T的左孩子的右子树上，要作双旋处理 */
 			Lr=L->rchild; /*  Lr指向T的左孩子的右子树根 */
-			switch(Lr->bf)
-			{ /*  修改T及其左孩子的平衡因子 */
+			switch(Lr->bf) { /*  修改T及其左孩子的平衡因子 */
 				case LH: (*T)->bf=RH;
 						 L->bf=EH;
 						 break;
@@ -64,20 +61,17 @@ void LeftBalance(BiTree *T)
 
 /*  对以指针T所指结点为根的二叉树作右平衡旋转处理， */
 /*  本算法结束时，指针T指向新的根结点 */
-void RightBalance(BiTree *T)
-{
+void RightBalance(BiTree *T) {
 	BiTree R,Rl;
 	R=(*T)->rchild; /*  R指向T的右子树根结点 */
-	switch(R->bf)
-	{ /*  检查T的右子树的平衡度，并作相应平衡处理 */
+	switch(R->bf) { /*  检查T的右子树的平衡度，并作相应平衡处理 */
 	 case RH: /*  新结点插入在T的右孩子的右子树上，要作单左旋处理 */
 			  (*T)->bf=R->bf=EH;
 			  L_Rotate(T);
 			  break;
 	 case LH: /*  新结点插入在T的右孩子的左子树上，要作双旋处理 */
 			  Rl=R->lchild; /*  Rl指向T的右孩子的左子树根 */
-			  switch(Rl->bf)
-			  { /*  修改T及其右孩子的平衡因子 */
+			  switch(Rl->bf) { /*  修改T及其右孩子的平衡因子 */
 				case RH: (*T)->bf=LH;
 						 R->bf=EH;
 						 break;
@@ -96,27 +90,21 @@ void RightBalance(BiTree *T)
 /*  若在平衡的二叉排序树T中不存在和e有相同关键字的结点，则插入一个 */
 /*  数据元素为e的新结点，并返回1，否则返回0。若因插入而使二叉排序树 */
 /*  失去平衡，则作平衡旋转处理，布尔变量taller反映T长高与否。 */
-Status InsertAVL(BiTree *T,int e,Status *taller)
-{
-	if(!*T)
-	{ /*  插入新结点，树“长高”，置taller为TRUE */
+Status InsertAVL(BiTree *T,int e,Status *taller) {
+	if(!*T) { /*  插入新结点，树“长高”，置taller为TRUE */
 		 *T=(BiTree)malloc(sizeof(BiTNode));
 		 (*T)->data=e; (*T)->lchild=(*T)->rchild=NULL; (*T)->bf=EH;
 		 *taller=TRUE;
-	}
-	else
-	{
-		if (e==(*T)->data)
-		{ /*  树中已存在和e有相同关键字的结点则不再插入 */
+	} else {
+		if (e==(*T)->data) { /*  树中已存在和e有相同关键字的结点则不再插入 */
 			*taller=FALSE; return FALSE;
 		}
-		if (e<(*T)->data)
-		{ /*  应继续在T的左子树中进行搜索 */
-			if(!InsertAVL(&(*T)->lchild,e,taller)) /*  未插入 */
+		if (e<(*T)->data) { /*  应继续在T的左子树中进行搜索 */
+			if(!InsertAVL(&(*T)->lchild,e,taller)) { /*  未插入 */
 				return FALSE;
-			if(*taller) /*   已插入到T的左子树中且左子树“长高” */
-				switch((*T)->bf) /*  检查T的平衡度 */
-				{
+            }
+			if(*taller) {/*   已插入到T的左子树中且左子树“长高” */
+				switch((*T)->bf) { /*  检查T的平衡度 */
 					case LH: /*  原本左子树比右子树高，需要作左平衡处理 */
 							LeftBalance(T);	*taller=FALSE; break;
 					case EH: /*  原本左、右子树等高，现因左子树增高而使树增高 */
@@ -124,14 +112,13 @@ Status InsertAVL(BiTree *T,int e,Status *taller)
 					case RH: /*  原本右子树比左子树高，现左、右子树等高 */
 							(*T)->bf=EH; *taller=FALSE; break;
 				}
-		}
-		else
-		{ /*  应继续在T的右子树中进行搜索 */
-			if(!InsertAVL(&(*T)->rchild,e,taller)) /*  未插入 */
+            }
+		} else { /*  应继续在T的右子树中进行搜索 */
+			if(!InsertAVL(&(*T)->rchild,e,taller)) { /*  未插入 */
 				return FALSE;
-			if(*taller) /*  已插入到T的右子树且右子树“长高” */
-				switch((*T)->bf) /*  检查T的平衡度 */
-				{
+            }
+			if(*taller) {/*  已插入到T的右子树且右子树“长高” */
+				switch((*T)->bf) { /*  检查T的平衡度 */
 					case LH: /*  原本左子树比右子树高，现左、右子树等高 */
 							(*T)->bf=EH; *taller=FALSE;	break;
 					case EH: /*  原本左、右子树等高，现因右子树增高而使树增高  */
@@ -139,6 +126,7 @@ Status InsertAVL(BiTree *T,int e,Status *taller)
 					case RH: /*  原本右子树比左子树高，需要作右平衡处理 */
 							RightBalance(T); *taller=FALSE; break;
 				}
+            }
 		}
 	}
 	return TRUE;
@@ -152,14 +140,12 @@ void in_order_traverse(BiTree T) {
     printf("%d ", T->data);
     in_order_traverse(T->rchild);
 }
-int main(void)
-{
+int main(void) {
 	int i;
 	int a[10]={3,2,1,4,5,6,7,10,9,8};
 	BiTree T=NULL;
 	Status taller;
-	for(i=0;i<10;i++)
-	{
+	for(i=0;i<10;i++) {
 		InsertAVL(&T,a[i],&taller);
 	}
     in_order_traverse(T);

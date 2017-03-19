@@ -1,10 +1,7 @@
 Algorithm
   heap sort
 Data Structure
-  tree
-  link-list
+  trie-tree
   double-node link-list
   stack
   queue
-  set
-  dynamic array (vector)
