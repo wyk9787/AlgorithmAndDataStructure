@@ -93,7 +93,7 @@ public class Sorting{
             merge(list, lo, middle, hi);
         }
     }
-    
+
     private static <T extends Comparable<T>> void mergeSort(ArrayList<T> list) {
         mergeSortHelper(list, 0, list.size() - 1);
     }
